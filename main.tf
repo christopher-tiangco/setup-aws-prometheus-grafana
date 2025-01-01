@@ -23,6 +23,11 @@ resource "aws_iam_role" "assume" {
   })
 }
 
+resource "aws_iam_role_policy_attachment" "grafana_assume_role_policy" {
+  role        = aws_iam_role.assume.name
+  policy_arn  = "arn:aws:iam::aws:policy/AmazonPrometheusFullAccess"
+}
+
 resource "aws_grafana_workspace" "k6_performance_test" {
   name                     = "k6_performance_test"
   account_access_type      = "CURRENT_ACCOUNT"
